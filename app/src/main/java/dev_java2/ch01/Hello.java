@@ -1,7 +1,16 @@
-package main.java.dev_java2.ch01;
+package dev_java2.ch01;
 
 public class Hello {
+
+  int methodA(int i, int j) {
+    int hap;
+    hap = i + j;
+    return hap;
+  }
+
   public static void main(String[] args) {
-    System.out.println("dfsfsdf");
+    Hello hello = new Hello();
+    hello.methodA(2, 3);
+    System.out.println("Hello i am");
   }
 }
