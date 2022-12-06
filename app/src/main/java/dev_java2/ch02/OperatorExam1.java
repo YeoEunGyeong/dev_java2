@@ -17,4 +17,6 @@ public class OperatorExam1 {
     } // end of switch
     System.out.println(i);
   }
-}
+} 
+// case문마다 같은 변수 사용 가능 ; {} << 사용 시
+// 
