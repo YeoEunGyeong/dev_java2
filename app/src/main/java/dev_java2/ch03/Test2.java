@@ -1,7 +1,7 @@
 package dev_java2.ch03;
 
 public class Test2 {
-  public static void main(String[] args) {
+  public void 메소드이름() {
     for (int i = 1; i <= 20; i++) {
       switch (i % 5) {
         case 0:
@@ -14,5 +14,9 @@ public class Test2 {
       }
     }
 
+  }
+  public static void main(String[] args) {
+    Test2 t2 = new Test2();
+    t2.메소드이름();
   }
 }
