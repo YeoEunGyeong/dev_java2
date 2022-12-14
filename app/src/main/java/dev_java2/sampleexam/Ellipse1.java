@@ -14,7 +14,7 @@ public class Ellipse1 {
         // new 다음에 오는 클래스 생성 ; 이때, 생성자 호출(마치 메소드처럼)
         Scanner s = new Scanner(System.in); // 인스턴스화 ; 메모리에 로딩 // 메소드, 변수 호출 가능
         System.out.print("첫 번째 반지름 입력");
-        String user1 = s.nextLine(); 
+        String user1 = s.nextLine();
         System.out.println("사용자가 입력한 첫 번째 반지름은 : " + user1);
         System.out.print("두 번째 반지름 입력");
         String user2 = s.nextLine();
@@ -24,5 +24,5 @@ public class Ellipse1 {
         System.out.println("타원형의 면적은 ?? " + area + "임~~");
 
     }
-    
+
 }

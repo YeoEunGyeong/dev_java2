@@ -9,8 +9,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import dev_java2.view.ActionListner;
-
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -27,7 +25,7 @@ public class ButtonArray1_copy implements ActionListener {
     JPanel jp_east = new JPanel();
     // 원본과 다르게 배열로 생성
     JButton jbtns[] = new JButton[4];
-    String jbtns_label[] = {"새게임", "정답", "지우기", "종료"};
+    String jbtns_label[] = { "새게임", "정답", "지우기", "종료" };
 
     // 생성자
     public ButtonArray1_copy() {
@@ -46,7 +44,7 @@ public class ButtonArray1_copy implements ActionListener {
         jp_center.add("Center", jsp_display);
         jp_center.add("South", jtf_input);
         jp_east.setLayout(new GridLayout(4, 1, 2, 2)); // 버튼 레이아웃을 설정
-        for(int i = 0; i < jbtns.length; i++){
+        for (int i = 0; i < jbtns.length; i++) {
             jbtns[i] = new JButton(jbtns_label[i]);
             jbtns[i].addActionListener(this);
             jp_east.add(jbtns[i]);
@@ -71,6 +69,7 @@ public class ButtonArray1_copy implements ActionListener {
     public static void main(String[] args) {
         new ButtonArray1_copy();
     }
+
     @Override // << 콜백 메소드
     public void actionPerformed(ActionEvent e) {
         // e.getSource는 이벤트가 감지되는 컴포넌트(JTextField)의 주소 번지 반환
