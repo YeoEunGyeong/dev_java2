@@ -7,7 +7,7 @@ public class Multiple {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.print("입력값 : ");
-        int user1 = s.nextInt();
+        int user1 = s.nextInt(); 
         System.out.print("입력값 : ");
         int user2 = s.nextInt();
 
