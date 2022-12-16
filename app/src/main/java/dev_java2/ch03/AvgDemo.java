@@ -28,17 +28,19 @@ public class AvgDemo {
 		haps[2] = springHap;
 		System.out.println("스프링 총점은 ? " + springHap);
 	}
-	void allAvg(){
-		for(int i=0;i<haps.length;i++){
-			avgs[i] = haps[i] / (double)3;
+
+	void allAvg() {
+		for (int i = 0; i < haps.length; i++) {
+			avgs[i] = haps[i] / (double) 3;
 		}
 	}
+
 	public static void main(String[] args) {
 		AvgDemo ad = new AvgDemo();
 		ad.allTot();
 		ad.allAvg();
-		for(int i=0;i<ad.haps.length;i++){
-			System.out.println("총점은 "+ad.haps[i] +", 평균은 "+ad.avgs[i]);
+		for (int i = 0; i < ad.haps.length; i++) {
+			System.out.println("총점은 " + ad.haps[i] + ", 평균은 " + ad.avgs[i]);
 		}
 	}
 }

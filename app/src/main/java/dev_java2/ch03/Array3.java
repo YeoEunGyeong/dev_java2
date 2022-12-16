@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Array3 {
   public static void main(String[] args) {
-    int i[] = {1, 2, 3};
-    int j[]; 
+    int i[] = { 1, 2, 3 };
+    int j[];
     j = i; // 주소 번지가 동일하게 설정
     System.out.println(j[1]);
     int k[];
@@ -20,5 +20,5 @@ public class Array3 {
     String s1 = "안녕";
     String s2 = s1;
   }
-  
+
 }

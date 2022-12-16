@@ -4,7 +4,7 @@ public class GradeDemo {
 	String[] subject = { "JAVA", "ORACLE", "SPRING" };
 	String[][] data = {
 			{ "이순신", "80", "75", "70" }, { "강감찬", "90", "85", "95" }, { "김춘추", "65", "60", "60" }
-	}; //                0                                 1                             2
+	}; // 0 1 2
 
 	void namePrint() {
 		for (int i = 0; i < data.length; i++) {

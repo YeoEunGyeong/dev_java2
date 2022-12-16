@@ -24,10 +24,8 @@ public class DeptTable1_2 extends JFrame implements ActionListener { // DeptTabl
     // 선언
     String header[] = { "부서 번호", "부서명", "지역" };
     String datas[][] = new String[0][3];
-    String [][] depts = {
-    {"10", "개발", "서울"}
-    ,{"20", "인사", "속초"}
-    ,{"30", "영업", "강릉"}
+    String[][] depts = {
+            { "10", "개발", "서울" }, { "20", "인사", "속초" }, { "30", "영업", "강릉" }
     };
     // this는 사용되는 클래스 영역에서 선언된 클래스를 가르킴
     // 그러면 여기서 this는 DeptTable1
@@ -73,28 +71,29 @@ public class DeptTable1_2 extends JFrame implements ActionListener { // DeptTabl
     @Override
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
-        if (obj == jbtn_del){
+        if (obj == jbtn_del) {
             int index = jtb_dept.getSelectedRow();
             System.out.println(index);
-            Integer deptno = Integer.parseInt((String)dtm_dept.getValueAt(index, 0));
+            Integer deptno = Integer.parseInt((String) dtm_dept.getValueAt(index, 0));
             System.out.println(deptno);
         }
-        if (obj == jbtn_check){ // 너 조회 눌렀어 ??
-            for (int x = 0; x < depts.length; x++){
-				Vector<String> oneRow = new Vector<>();
-				oneRow.add(depts[x][0]); // 부서 번호
-				oneRow.add(depts[x][1]); // 부서명
-				oneRow.add(depts[x][2]); // 지역
-				dtm_dept.addRow(oneRow);
-			} for (int i = 0; i < depts.length; i++){
-                for (int j = 0; j < depts[i].length; j++){
+        if (obj == jbtn_check) { // 너 조회 눌렀어 ??
+            for (int x = 0; x < depts.length; x++) {
+                Vector<String> oneRow = new Vector<>();
+                oneRow.add(depts[x][0]); // 부서 번호
+                oneRow.add(depts[x][1]); // 부서명
+                oneRow.add(depts[x][2]); // 지역
+                dtm_dept.addRow(oneRow);
+            }
+            for (int i = 0; i < depts.length; i++) {
+                for (int j = 0; j < depts[i].length; j++) {
                     // System.out.print(depts[i][j] + " "); // 3개 출력하고 줄바꿈
                     // dtm_dept.setValueAt("Xxxxxx", i, j)); // set = write ; 정보를 추가 입력
                     // System.out.println(dtm_dept.getValueAt(i, j)); // ??? get = read ; 정보를 읽어오는 것
                 } // end of inner for
-            System.out.println();
+                System.out.println();
             } // end of outter for
-            // DefaultTableModel에 데이터 초기화 
-        } // end of 조회 
+              // DefaultTableModel에 데이터 초기화
+        } // end of 조회
     }
 }

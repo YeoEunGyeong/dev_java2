@@ -1,7 +1,7 @@
 package dev_java2.ch01;
 
 public class Pride {
-  
+
   public static void main(String[] args) {
     Pride myCar = new Pride();
     Pride herCar = new Pride();

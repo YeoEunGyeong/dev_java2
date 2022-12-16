@@ -8,6 +8,7 @@ public class HintPart1 {
   int my[] = new int[3];
   // 회차를 담을 변수 선언
   int cnt = 0;
+
   // 새 게임 버튼을 누르면 3자리의 서로 다른 숫자를 채번
   public void ranCom() {
     com[0] = (int) (Math.random() * 10);

@@ -35,16 +35,17 @@ public class MemberVO {
   // setter ; write, save
 
   /////// **수업 내용
-  /////// public void setMem_id(String mem_id) { // setter 메소드를 통해서 전역변수를 초기화 >> 5열
-    //// setMem_id를 설정하기 위해 파라미터 안에 String 타입 선언 ; id는 string으로 선언 가능
-    //// this.mem_id = mem_id;
-  ////}
+  /////// public void setMem_id(String mem_id) { // setter 메소드를 통해서 전역변수를 초기화 >>
+  /////// 5열
+  //// setMem_id를 설정하기 위해 파라미터 안에 String 타입 선언 ; id는 string으로 선언 가능
+  //// this.mem_id = mem_id;
+  //// }
 
   /////// getter ; read, listn
   /////// public String getMem_id() { // 초기화된 mem_id를 출력하기 위해 getter 사용
-    //// return mem_id;
-  ////}
-  
+  //// return mem_id;
+  //// }
+
   public static void main(String[] args) {
     MemberVO memberVO = new MemberVO();
     System.out.println(memberVO.mem_id); // null 출력, 클래스 내부 private 사용 가능

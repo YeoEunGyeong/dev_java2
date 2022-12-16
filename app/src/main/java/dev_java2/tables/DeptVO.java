@@ -5,6 +5,16 @@ public class DeptVO {
     private String dname;
     private String loc;
 
+    public DeptVO() {
+
+    }
+
+    public DeptVO(int dptno, String dname, String loc) {
+        this.deptno = dptno;
+        this.dname = dname;
+        this.loc = loc;
+    }
+
     public int getDeptno() {
         return this.deptno;
     }

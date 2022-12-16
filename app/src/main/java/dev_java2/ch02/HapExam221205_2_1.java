@@ -2,7 +2,7 @@ package dev_java2.ch02;
 
 import java.util.Scanner;
 
-public class HapExam221205_2_1 { 
+public class HapExam221205_2_1 {
 
   public static void main(String[] args) {
     Scanner s = new Scanner(System.in);
@@ -18,8 +18,8 @@ public class HapExam221205_2_1 {
     System.out.println("===========");
 
     int i = 1;
-    while (i <= user_end){
-      if (i % 2 == 1){
+    while (i <= user_end) {
+      if (i % 2 == 1) {
         sum = i + 1;
       }
     }

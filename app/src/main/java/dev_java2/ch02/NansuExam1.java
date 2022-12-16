@@ -21,10 +21,11 @@ public class NansuExam1 {
       com[2] = (int) (Math.random() * 10);
     } while (com[0] == com[2] || com[1] == com[2]);
   }
+
   // 20221206 과제
-  // 초기화 = 전변 / 지변 ? ; 지변 
+  // 초기화 = 전변 / 지변 ? ; 지변
   // 자리가 같다는 것을 배열의 index 활용
-  public String accop(String user_input){
+  public String accop(String user_input) {
     // insert here
     Scanner scanner = new Scanner(System.in);
     return "1스 2볼";

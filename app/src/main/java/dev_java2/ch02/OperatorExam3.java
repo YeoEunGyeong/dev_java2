@@ -14,7 +14,7 @@ public class OperatorExam3 {
       System.out.println("조건을 만족하지 않았을 경우");
     }
     // insert here ; i와 j 값?
-    System.out.println("i =" + i + ",j = " + j); 
-    }
+    System.out.println("i =" + i + ",j = " + j);
+  }
 }
 // & < 참, 참 = 참 참, 거짓 = 거짓 거짓, 참 = 거짓, 거짓, 거짓 = 거짓

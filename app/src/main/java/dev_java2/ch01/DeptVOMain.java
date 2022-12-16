@@ -3,7 +3,7 @@ package dev_java2.ch01;
 public class DeptVOMain {
 
   public static void main(String[] args) {
-    DeptVO deptVO = new DeptVO(); 
+    DeptVO deptVO = new DeptVO();
     deptVO.deptno = 10;
     deptVO.dname = "개발1팀";
     deptVO.loc = "부산";

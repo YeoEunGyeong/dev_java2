@@ -1,10 +1,11 @@
 package dev_java2.ch02;
+
 // 갯수가 다르거나, 
 public class Exam1_1 {
   int i;
   int hap;
 
-  // 디폴트 생성자 ; 디폴트 생성자는 파라미터를 결정해 줄 필요 없음 
+  // 디폴트 생성자 ; 디폴트 생성자는 파라미터를 결정해 줄 필요 없음
   // 생략하면 JVM이 대신 생성해 주어 전변들을 초기화
   public Exam1_1() {
     System.out.println("디폴트 생성자 호출 성공" + i + ", " + hap); // i = 0, hap = 0

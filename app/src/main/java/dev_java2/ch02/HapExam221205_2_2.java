@@ -14,7 +14,7 @@ public class HapExam221205_2_2 {
         tot = tot + cnt;
       }
     }
-    System.out.println("tot :"+ tot + ", cnt :"+ cnt);
+    System.out.println("tot :" + tot + ", cnt :" + cnt);
     s.close();
     System.out.println("===========");
 
@@ -23,7 +23,7 @@ public class HapExam221205_2_2 {
         tot = cnt + 1;
       }
     }
-    System.out.println("tot :"+ tot + ", cnt :"+ cnt);
+    System.out.println("tot :" + tot + ", cnt :" + cnt);
     s.close();
   }
 }

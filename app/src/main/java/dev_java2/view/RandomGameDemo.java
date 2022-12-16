@@ -16,7 +16,7 @@ public class RandomGameDemo implements ActionListener {
   JButton jbtn_east = new JButton("동쪽");
   JButton jbtn_center = new JButton("중앙");
 
-  // 생성자 
+  // 생성자
   public RandomGameDemo() {
     System.out.println("디폴트 생성자 호출 성공");
     initDisplay();

@@ -27,8 +27,9 @@ public class QuizPlus {
     public static void main(String[] args) {
         QuizPlus qp = new QuizPlus();
         qp.abcd();
-        for (int i = 0; i < qp.user.length; i++){
-        System.out.println(qp.user[i]);}
+        for (int i = 0; i < qp.user.length; i++) {
+            System.out.println(qp.user[i]);
+        }
         qp.efg();
         System.out.println("\n" + "양의 정수 합!!! : " + qp.sum1 + " ,음의 정수 합!!! : " + qp.sum2);
     }

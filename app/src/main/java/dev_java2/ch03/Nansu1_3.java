@@ -64,16 +64,16 @@ public class Nansu1_3 {
       System.out.println(user + " : " + 반환값);
       // i++;
       // 주어진 기회를 모두 사용하였습니다.
-      // 3번의 기회를 주게 되고 65열에 증가 연산자를 입력하여 0이 아닌 1에서 시작 // i = 4 
-      if(i == 4){
+      // 3번의 기회를 주게 되고 65열에 증가 연산자를 입력하여 0이 아닌 1에서 시작 // i = 4
+      if (i == 4) {
         System.out.println("주어진 기회(또는 맞추었음)를 모두 사용하였다.\n 새 게임을 시작하려면 Y, 아니면 N을 입력하시오");
         String choice = s.nextLine();
-        if("Y".equals(choice)){
+        if ("Y".equals(choice)) {
           // 새 게임 시작 ; 채번을 다시 해야 하므로 ranCom() 호출
           n.ranCom();
-          System.out.println("새 게임을 시작합니다 ==> 정답 : "+n.com);
+          System.out.println("새 게임을 시작합니다 ==> 정답 : " + n.com);
           i = 1;
-        }else if("N".equals(choice)) {
+        } else if ("N".equals(choice)) {
           System.out.println("종료합니다\n");
           System.exit(0); // JVM과 연결 끊김
         }
