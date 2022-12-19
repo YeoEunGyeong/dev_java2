@@ -19,7 +19,7 @@ public class Quiz3 {
         int index = 0;
         for (int i = 0; i < 100; i++) {
             index = datas[i];
-            counts[index]++;
+            counts[index]++; 
         }
     }
 
