@@ -52,7 +52,7 @@ public class VectorCRUD2 {
             }
         }
         int result = 0; // 1 성공, 0 실패
-        for (int i = 0; i < vdept.size(); i++) {
+        here : for (int i = 0; i < vdept.size(); i++) {
             String row[] = vdept.get(i); // i는 row index
             // if() ; 벡터에서 꺼낸 배열(row)과 비교 (기존에 가지고 있는 정보)
             for (int j = 0; j < row.length; j++) { // String[] 돌림
@@ -63,14 +63,19 @@ public class VectorCRUD2 {
                 System.out.println(deptno + ", " + deptno2);
                 if (deptno == deptno2) {
                     String[] updRow = { oneRow[0], user_dname, user_loc }; // 새로 받아오는 정보값을 updRow에 담김
-                    vdept.remove(i); // 기존에 가지고 있는 값 삭제
-                    vdept.add(i, updRow);
-                    break;
+                    // 수정이라 말하고 입력으로 처리 ; 한 셀씩 수정하는 것
+                    vdept.remove(i); // 기존에 가지고 있는 값 삭제(i번째 자리 삭제)
+                    // Vector 사용하면 배열의 모든 단점을 보완 ; 고정, 타입의 단
+                    // Vector<Object>
+                    vdept.add(i, updRow); // 삭제된 자리에 추가 ; 배열의 장애 int i[] = new int[3]
+                    // break문만 사용 시 for문에서 내부 for문만을 탈출
+                    // 여기서는 외부 for문을 빠져나가야 하므로 라벨문을 붙여 처리
+                    break here;
                 } else {
                     System.out.println("선택한 부서 번호와 벡터에서 가져온 부서 번호 다름");
                 }
-            } // end String[] ; 배열
-        } // end Vector
+            } // end String[] ; 배열 inner for
+        } // end Vector ; outter for
         return result;
     }
 

@@ -34,7 +34,7 @@ public class List2 {
             String fname = (String) iter2.next(); // 제네릭 타입을 지정하지 않아서 에러, 강제형변환을 통해 사용 가능하지만 권장 Xxxx
             System.out.println(fname);
         }
-        Iterator<Object> iter3 = fruitList.iterator();
+        // Iterator<Object> iter3 = fruitList.iterator();
         // <Object> 사용 불가 ; Vector의 제네릭 타입은 String이기 때문
         Iterator<String> iter4 = fruitList.iterator();
     }
