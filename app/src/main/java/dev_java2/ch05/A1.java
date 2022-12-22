@@ -4,6 +4,7 @@ import java.util.Vector;
 
 public class A1 {
     int ival = 1;
+
     public static void main(String[] args) {
         A1 a1 = new A1();
         a1.ival = 10;

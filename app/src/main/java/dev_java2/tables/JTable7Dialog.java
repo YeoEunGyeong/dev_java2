@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import dev_java2.ch05.DeptVO;
 
 public class JTable7Dialog extends JDialog implements ActionListener {
     // 선언
@@ -19,6 +20,7 @@ public class JTable7Dialog extends JDialog implements ActionListener {
     JPanel jp_south = new JPanel();
     JLabel jlb_deptno = new JLabel("부서번호");
     JTextField jtf_deptno = new JTextField(10);
+    JButton jbtn_check = new JButton("중복체크");
     JLabel jlb_dname = new JLabel("부서명");
     JTextField jtf_dname = new JTextField(20);
     JLabel jlb_loc = new JLabel("지역");
@@ -26,8 +28,9 @@ public class JTable7Dialog extends JDialog implements ActionListener {
     // jp_south 속지
     JButton jbtn_save = new JButton("저장");
     JButton jbtn_close = new JButton("닫기");
+    JButton jbtn_sample = new JButton("자동입력");
     // 왜 null을 주는지 설명할 수 있다
-    String[] oneRow = null;
+    DeptVO pdVO = null;
 
     public JTable7Dialog(DeptTable7 deptTable7) {
         this.deptTable7 = deptTable7;
@@ -38,24 +41,30 @@ public class JTable7Dialog extends JDialog implements ActionListener {
     private void initDisplay() {
         jbtn_save.addActionListener(this);
         jbtn_close.addActionListener(this);
+        jbtn_sample.addActionListener(this);
+        jbtn_check.addActionListener(this);
         jp_center.setLayout(null);
         jp_south.setLayout(new FlowLayout(FlowLayout.RIGHT));
         jlb_deptno.setBounds(20, 20, 100, 20);
         jtf_deptno.setBounds(120, 20, 100, 20);
+        jbtn_check.setBounds(220, 20, 120, 20);
         jlb_dname.setBounds(20, 45, 100, 20);
         jtf_dname.setBounds(120, 45, 150, 20);
         jlb_loc.setBounds(20, 70, 100, 20);
         jtf_loc.setBounds(120, 70, 150, 20);
         jp_center.add(jlb_deptno);
         jp_center.add(jtf_deptno);
+        jp_center.add(jbtn_check);
         jp_center.add(jlb_dname);
         jp_center.add(jtf_dname);
         jp_center.add(jlb_loc);
         jp_center.add(jtf_loc);
         jp_south.add(jbtn_save);
         jp_south.add(jbtn_close);
+        jp_south.add(jbtn_sample);
         this.add("Center", jsp_center);
         this.add("South", jp_south);
+
         this.setSize(400, 360);
         this.setVisible(false);
     }
@@ -93,17 +102,26 @@ public class JTable7Dialog extends JDialog implements ActionListener {
     // 아래 메소드는 DeptTable7에서 호출
     // actionListener에서 이벤트(입력, 수정, 상세보기)가 발생되면 호출
     // 메소드의 파라미터 자리는 Call by Value에 의해서 결정
-    public void set(String title, boolean isView, String[] oneRow) {
+    public void set(String title, boolean isView, DeptVO pdVO, boolean isEdit) {
         this.setTitle(title);
         this.setVisible(isView);
-        this.oneRow = oneRow;
-        setValue(oneRow);
+        this.pdVO = pdVO;
+        setValue(pdVO);
+        setEditable(isEdit);
     }
 
-    public void setValue(String[] oneRow) {
+    // 입력 혹은 수정일 때 true로 처리
+    // 상세보기일 때 false로 처리하여 얼림
+    private void setEditable(boolean isEdit) {
+        jtf_deptno.setEditable(isEdit);
+        jtf_dname.setEditable(isEdit);
+        jtf_loc.setEditable(isEdit);
+    }
+
+    public void setValue(DeptVO pdVO) {
         // 입력을 위한 윈도우 설정 ; 모든 값을 빈문자열로 셋팅
         // actionPerformed에서 이벤트(입력, 수정, 상세보기)가 발생되면 호출
-        if (oneRow == null) {
+        if (pdVO == null) {
             setDeptno("");
             setDname("");
             setLoc("");
@@ -111,9 +129,9 @@ public class JTable7Dialog extends JDialog implements ActionListener {
         // 상세조회, 수정 시 배열로 받은 값으로 셋팅
         // 부모창에서 set메소드 호출 시 파라미터로 넘겨준 값으로 초기화
         else {
-            setDeptno(oneRow[0]);
-            setDname(oneRow[1]);
-            setLoc(oneRow[2]);
+            setDeptno(String.valueOf(pdVO.getDeptno()));
+            setDname(pdVO.getDname());
+            setLoc(pdVO.getLoc());
         }
     } // end of setValue
 
@@ -122,17 +140,41 @@ public class JTable7Dialog extends JDialog implements ActionListener {
         Object obj = e.getSource();
         if (obj == jbtn_save) {
             // oneRow가 존재하면 수정모드, 그렇지 않으면 입력모드
-            if (oneRow != null) {
-
+            // 다이얼로그 화면에서 저장 버튼 하나로 입력과 수정 처리
+            // 어떻게 ?? 부모창에서 버튼이 눌려졌을 때 set메소드 호출
+            // 이때, 입력이면 세 번째 파라미터에 null 입력
+            // 수정이면 JTable에서 선택된 로우의 인덱스로 DeptVO 추출하여 세 번째 파라미터에 null 대신 입력
+            // ; 내 안에 수정하고자 하는 로우의 DeptVO가 있고 그 안에 deptno, dname, loc 존재
+            if (pdVO != null) {
+                // 처음에는 Vector에 Generic으로 String[] 사용하여 2중 for문 사용했음
+                // 그런데 지금 DeptVO 변경했기 때문에 for문 하나
+                for (int i = 0; i < DeptTable7.vdata.size(); i++) {
+                    DeptVO comVO = DeptTable7.vdata.get(i);
+                    // 부모창(DeptTable7)에서 set 메소드 세 번째 파라미터에서 받아온 부서 번호와
+                    // Vector에서 꺼낸 DeptVO의 부서 번호가 동일 ??
+                    if (pdVO.getDeptno() == comVO.getDeptno()) {
+                        DeptVO updVO = DeptVO.builder().deptno(Integer.parseInt(getDeptno())).dname(getDname())
+                                .loc(getLoc()).build();
+                        DeptTable7.vdata.remove(i);
+                        break;
+                    }
+                    deptTable7.refreshData();
+                    this.dispose();
+                }
             } else {
-                String[] oneRow = { getDeptno(), getDname(), getLoc() };
-                System.out.println(oneRow[0] + ", " + oneRow[1] + ", " + oneRow[2]);
+                DeptVO insVO = DeptVO.builder().deptno(Integer.parseInt(getDeptno())).dname(getDname()).loc(getLoc())
+                        .build();
                 System.out.println("before" + DeptTable7.vdata.size());
-                DeptTable7.vdata.add(oneRow);
+                DeptTable7.vdata.add(insVO);
                 System.out.println("after" + DeptTable7.vdata.size());
                 deptTable7.refreshData();
                 this.dispose(); // 자손창(다이얼로그) 닫기
             }
+        } // end save
+        else if (obj == jbtn_sample) {
+            setDeptno("30");
+            setDname("운영부");
+            setLoc("양양");
         }
     }
 }
