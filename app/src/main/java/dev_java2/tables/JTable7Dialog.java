@@ -156,6 +156,7 @@ public class JTable7Dialog extends JDialog implements ActionListener {
                         DeptVO updVO = DeptVO.builder().deptno(Integer.parseInt(getDeptno())).dname(getDname())
                                 .loc(getLoc()).build();
                         DeptTable7.vdata.remove(i);
+                        DeptTable7.vdata.add(i, updVO);
                         break;
                     }
                     deptTable7.refreshData();

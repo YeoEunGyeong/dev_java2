@@ -65,7 +65,6 @@ public class ButtonArray1_copy implements ActionListener {
         jf.setVisible(true);
     }
 
-    
     // 메인 메소드
     public static void main(String[] args) {
         new ButtonArray1_copy();

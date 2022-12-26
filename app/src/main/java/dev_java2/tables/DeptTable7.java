@@ -121,11 +121,21 @@ public class DeptTable7 extends JFrame implements ActionListener {
             int index = jtb_dept.getSelectedRow();
             if (index == -1) { // -1은 end of file의 의미 ; 끝까지 다 찾았으나 없음
                 JOptionPane.showMessageDialog(this, "상세보기 선택");
-                return;
+                return; // actionPerformed 탈출
             }
             // Vector안에서 사용자가 선택한 DeptVO 찾아야하니까 선택해
             DeptVO pdVO = vdata.get(index);
             jtd7.set("상세보기", true, pdVO, false);
+        }
+        // 삭제 ??
+        else if (obj == jbtn_del) {
+            int index = jtb_dept.getSelectedRow();
+            if (index == -1) { // -1은 end of file의 의미 ; 끝까지 다 찾았으나 없음
+                JOptionPane.showMessageDialog(this, "삭제 선택");
+                return;
+            }
+            vdata.remove(index);
+            refreshData();
         }
     }
 

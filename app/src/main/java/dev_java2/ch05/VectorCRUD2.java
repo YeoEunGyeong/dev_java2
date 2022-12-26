@@ -52,7 +52,7 @@ public class VectorCRUD2 {
             }
         }
         int result = 0; // 1 성공, 0 실패
-        here : for (int i = 0; i < vdept.size(); i++) {
+        here: for (int i = 0; i < vdept.size(); i++) {
             String row[] = vdept.get(i); // i는 row index
             // if() ; 벡터에서 꺼낸 배열(row)과 비교 (기존에 가지고 있는 정보)
             for (int j = 0; j < row.length; j++) { // String[] 돌림
