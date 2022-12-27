@@ -18,12 +18,16 @@ import java.awt.event.ActionListener;
 // 재정의 할 수 있음(Overriding ; 선언부 완전히 일치) 
 // 인터페이스는 오로지 추상 메소드만 갖음 ; Runnable도 인터페이스이기에 추상 메소드 가짐
 // Runnable - run 메소드(추상 메소드)
-public class TalkServer extends JFrame implements Runnable, ActionListener {
+// class TalkServer extends JFrame, Thread{}
+// POJO F/W 설계 ; 인터페이스 중심 코딩 전개 수업 - Spring boot(전자정부프레임워크)기반 MVC패턴 수업 진행
+// 자바스크립트 수업(ES5,6,7) - NodeJS
+// 리액트 수업(객체, 클래스, 리액트훅, 메소드, 파라미터, 리턴)
+public class TalkServer2 extends JFrame implements /* Runnable */ ActionListener {
     // 선언부
     // 클라이언트측에서 new Socket하면 그 소켓정보를 받아서 쓰레드로 넘김
-    TalkServerThread tst = null;
+    TalkServerThread2 tst = null;
     // 동시에 여러명이 접속하니까 List - Vector<>(); 멀티스레드 안전, 속도 느림
-    List<TalkServerThread> globalList = null;
+    List<TalkServerThread2> globalList = null;
     ServerSocket server = null;
     Socket socket = null;
     JTextArea jta_log = new JTextArea(10, 30);
@@ -31,8 +35,8 @@ public class TalkServer extends JFrame implements Runnable, ActionListener {
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     JButton jbtn_log = new JButton("로그 저장");
 
-    // 생성자
-    public TalkServer() {
+    // 생성자 ; 클래스 이름이 다르면 생성자 이름도 달라져야함
+    public TalkServer2() {
         // initDisplay();//시점문제- 스케쥴링
     }
 
@@ -47,17 +51,18 @@ public class TalkServer extends JFrame implements Runnable, ActionListener {
 
     // 스레드가 두 개이므로 화면 요청과 start() 순서를 바꾸더라도 각자 처리가 되기 때문에 화면 호출 가능
     public static void main(String[] args) { // 메인 스레드 ; entry point
-        TalkServer ts = new TalkServer();
-        ts.initDisplay();
+        TalkServer2 ts = new TalkServer2();
+        ts.initDisplay(); // 메인 스레드
+        ts.init(); // 나 서버 ; 클라이언트를 기다림, 대기해야 함,
         // 내 안에 run 메소드가 재정의(오버라이드)됨
-        Thread th = new Thread(ts); // 스레드 생성 시 파라미터로 TalkServer 객체 넘김
+        // 아래 코드 에러 발생 이유는 Runnable를 implements에서 제거하였기 때문
+        // Thread th = new Thread(ts); // 스레드 생성 시 파라미터로 TalkServer 객체 넘김
         // 스레드 풀(Pool ;스레드가 모여 있는 곳)에 있는 스레드 중에서 우선 순위 따져 차례대로 입장
-        th.start();// 52번 호출됨 - 지연발생함 - 클라이언트가 접속할때까지 기다림...
+        // th.start();// 52번 호출됨 - 지연발생함 - 클라이언트가 접속할때까지 기다림...
     }
 
     // 서버소켓과 클라이언트 소켓을 연결
-    @Override
-    public void run() { // 선언부와 일치해야 함 (Overrideing)
+    public void init() {
         // 서버에 접속해온 클라이언트 스레드 정보를 관리할 벡터 생성하기
         // Vector는 멀티 스레드 안전 ; 서버에 동시 접속자 수가 여러명이여도 Okay
         // 그래서 벡터 안에는 클라이언트를 관리하는 스레드 추가해야 함
@@ -82,7 +87,19 @@ public class TalkServer extends JFrame implements Runnable, ActionListener {
                 socket = server.accept();
                 jta_log.append("client info:" + socket + "\n");
                 jta_log.append("client info:" + socket.getInetAddress() + "\n");
-                TalkServerThread tst = new TalkServerThread(this);
+                // String - VARCHAR2, CHAR // int - number(5) == 9999 // double - number(7,2) ==
+                // 99999.99
+                // 이종간의 언어에서 데이터를 공유(static)하고자 하는 목적으로 설계하는 디자인 패턴 이름 (DTO도 유사하게 사용)
+                // DeptVO - this ; 전변에 대한 초기화일 때 사용 ValueObject 패턴 일부 - 오라클과 자바 연동에 필요함
+                // 이벤트 처리 시 이벤트 처리를 담당하는 클래스를 가리키는 목적으로 this 사용
+                // ActionListener - this ; 버튼.addActionListener(this)
+                // new XXX(this) ; 클래스 분리, MVC패턴으로 구현 시 사용
+                // 생성자 호출 시 파라미터로 들어오는 this는 현재 인스턴스화된 객체를 가리킴
+                // 아래는 객체를 생성하는 것과 동시에 생성자를 호출하는데 클래스 이름을 바꿈 ; 에러 발생
+                // 해결 방법은 TalkServerThread의 생성자 파라미터 타입을 TalkServer2 변경하면 됨
+                TalkServerThread2 tst = new TalkServerThread2(this); // 인스턴스화된 나 자신 TalkServer2
+                // TalkServer가 화면을 만들 때 JFrame 상속받았으므로 // super == JFrame
+                // TalkServerThread tst = new TalkServerThread(super);
                 tst.start();
             }
         } catch (Exception e) {
