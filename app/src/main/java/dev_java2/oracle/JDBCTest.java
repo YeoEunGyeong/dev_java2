@@ -9,7 +9,7 @@ import java.sql.DriverManager;
  */
 public class JDBCTest {
     // 이 클래스를 읽어야 오라클 제품인것을 확인가능함.
-    public static final String _DRIVER = "oracle.jdbc.driver.OracleDriver";
+    public static final String _DRIVER = "oracle.jdbc.driver.OracleDriver"; // 앞에는 폴더 이름, 뒤는 클래스 이름
     // 물리적으로 떨어져 있는 오라클 서버에 URL정보 추가
     public static final String _URL = "jdbc:oracle:thin:@127.0.0.1:1521:orcl11";
     public static String _USER = "scott";
