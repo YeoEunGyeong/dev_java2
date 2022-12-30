@@ -107,3 +107,8 @@ public class TalkServer extends JFrame implements Runnable, ActionListener {
  * 2 Runnable 인터페이스를 implements
  * 3 현재 TalkServer는 JFrame을 상속받고 있어서 Runnable을 implements함
  */
+
+ /*
+  * ServerSocket ; 동시에 많은 사람이 접속해 올 때 인원을 다 받기 위한 소켓
+    Socket 실제로 일하는 소켓
+  */
