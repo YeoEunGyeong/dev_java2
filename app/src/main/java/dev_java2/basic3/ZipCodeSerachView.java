@@ -9,7 +9,13 @@ import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -40,6 +46,15 @@ public class ZipCodeSerachView extends JFrame implements ItemListener {
     Connection con = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
+
+    // 테이블 생성
+    String[] cols = { "우편번호", "주소" };
+    String[][] data = new String[3][3];
+    DefaultTableModel dtm_zipcode = new DefaultTableModel(data, cols);
+    JTable jtb_zipcode = new JTable(dtm_zipcode);
+    JTableHeader jth_zipcode = jtb_zipcode.getTableHeader();
+    JScrollPane jsp_zipcode = new JScrollPane(jtb_zipcode, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     // 생성
     public ZipCodeSerachView() {
@@ -95,11 +110,17 @@ public class ZipCodeSerachView extends JFrame implements ItemListener {
 
     // 화면
     public void initDisplay() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jth_zipcode.setBackground(Color.LIGHT_GRAY);
+        // jth_zipcode.setFont(new Font("맑은고딕", Font.BOLD, 20));
+        jtb_zipcode.getColumnModel().getColumn(0).setPreferredWidth(100); // 간격 ; 우편번호
+        jtb_zipcode.getColumnModel().getColumn(1).setPreferredWidth(500); // 간격 ; 주소
+        jtb_zipcode.setGridColor(Color.BLUE); // 그리드 색상
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창닫기
         jp_north.add(jcb_zdo);
         jp_north.add(jcb_sigu);
         jp_north.add(jcb_dong);
         this.add("North", jp_north);
+        this.add("Center", jsp_zipcode);
         this.setSize(630, 400);
         this.setVisible(true);
     }
