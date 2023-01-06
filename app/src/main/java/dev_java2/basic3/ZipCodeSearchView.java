@@ -334,10 +334,12 @@ public class ZipCodeSearchView extends JFrame implements ItemListener, FocusList
             // System.out.println("더블클릭 ??"); // 테이블에 마우스리스너 추가해야 함
             // JTable에서 사용자가 선택한 로우의 index값 담기
             int index = jtb_zipcode.getSelectedRow();
-            for (int i = 0; i <dtm_zipcode.getRowCount(); i++) {
+            for (int i = 0; i < dtm_zipcode.getRowCount(); i++) {
                 if (jtb_zipcode.isRowSelected(i)) {
-                    String address = dtm_zipcode.getValueAt(i, 1).toString(); // String 타입으로 맞출 때 사용할 수 있는 두 가지 방법 to.String / String.ValueOf
-                    memberShip.jtf_zipcode.setText(String.valueOf(dtm_zipcode.getValueAt(i, 0))); // 0번째부터 들어오니까 index = 0
+                    String address = dtm_zipcode.getValueAt(i, 1).toString(); // String 타입으로 맞출 때 사용할 수 있는 두 가지 방법
+                                                                              // to.String / String.ValueOf
+                    memberShip.jtf_zipcode.setText(String.valueOf(dtm_zipcode.getValueAt(i, 0))); // 0번째부터 들어오니까 index =
+                                                                                                  // 0
                     memberShip.jtf_address.setText(address);
                 }
             }

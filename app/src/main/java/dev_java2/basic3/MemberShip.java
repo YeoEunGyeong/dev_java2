@@ -76,7 +76,6 @@ public class MemberShip extends JFrame implements ActionListener {
         this.setSize(500, 580);
         this.setVisible(true);
     }
-    
 
     public static void main(String[] args) {
         MemberShip ir = new MemberShip();
@@ -89,8 +88,7 @@ public class MemberShip extends JFrame implements ActionListener {
         // 우편번호 찾기 눌렀니 ??
         if (jbtn_zipcode == obj) {
             zsView.setVisible(true);
-        }
-        else if (jbtn_file == obj) {
+        } else if (jbtn_file == obj) {
             // [열기] 대화상자를 오픈한다
             myFileChooser.setCurrentDirectory(new File("D:\\vscode_java\\dev_java2\\images\\book\\"));
             int intRet = myFileChooser.showOpenDialog(MemberShip.this);

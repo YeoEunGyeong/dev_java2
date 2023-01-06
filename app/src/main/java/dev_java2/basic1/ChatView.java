@@ -13,24 +13,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ChatView extends JFrame implements ActionListener {
-    // 선언
-    String imgPath = "C:\\vscode_java_yeg\\dev_java_eg\\app\\src\\main\\java\\dev_java_eg\\images\\onion\\"; // 이미지 선언
-    ImageIcon onionIcon = new ImageIcon(imgPath + "onion.png"); //
-    JPanel centerPanel = new JPanel(); // 텍스트 메인 페널
-    JPanel sendPanel = new JPanel(); // 텍스트 전송 페널
-    JButton sendButton = new JButton("전송"); // 텍스트 전송 버튼
-    JTextField chatTextField = new JTextField(24); // 텍스트 입력
-    JTextArea chatDisplay = new JTextArea(15, 38); // 텍스트 전송 시 화면
-    JScrollPane scrollPane = new JScrollPane(chatDisplay, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //
-    
+  // 선언
+  String imgPath = "C:\\vscode_java_yeg\\dev_java_eg\\app\\src\\main\\java\\dev_java_eg\\images\\onion\\"; // 이미지 선언
+  ImageIcon onionIcon = new ImageIcon(imgPath + "onion.png"); //
+  JPanel centerPanel = new JPanel(); // 텍스트 메인 페널
+  JPanel sendPanel = new JPanel(); // 텍스트 전송 페널
+  JButton sendButton = new JButton("전송"); // 텍스트 전송 버튼
+  JTextField chatTextField = new JTextField(24); // 텍스트 입력
+  JTextArea chatDisplay = new JTextArea(15, 38); // 텍스트 전송 시 화면
+  JScrollPane scrollPane = new JScrollPane(chatDisplay, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //
 
-    // 생성
-    public ChatView() {
-        initDisplay();
-    }
+  // 생성
+  public ChatView() {
+    initDisplay();
+  }
 
-    // 화면
+  // 화면
   public void initDisplay() {
     // 메인 페널
     centerPanel.setLayout(new BorderLayout());
@@ -56,10 +55,10 @@ public class ChatView extends JFrame implements ActionListener {
     this.setDefaultCloseOperation(EXIT_ON_CLOSE); // X 클릭 자동 종료
   }
 
-    // 메인
-    public static void main(String[] args) {
-        new ChatView();
-    }
+  // 메인
+  public static void main(String[] args) {
+    new ChatView();
+  }
 
   @Override
   public void actionPerformed(ActionEvent e) {
