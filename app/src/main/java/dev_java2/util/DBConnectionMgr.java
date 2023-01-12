@@ -1,5 +1,6 @@
 package dev_java2.util;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,30 +9,36 @@ import java.sql.Statement;
 
 public class DBConnectionMgr {
     public static final String _DRIVER = "oracle.jdbc.driver.OracleDriver";
-    public static final String _URL = "jdbc:oracle:thin:@192.168.10.85:1521:orcl11";
-    public static String _USER = "scott";
-    public static String _PW = "tiger";
 
-    public Connection getConnection() {
+    public static final String _URL = "jdbc:oracle:thin:@localhost:1521:orcl11";
+    private String _USER;
+    private String _PW;
+
+    public Connection getConnection(String user, String pw) {
+        _USER = user;
+        _PW = pw;
         Connection con = null;
         try {
             Class.forName(_DRIVER);
             con = DriverManager.getConnection(_URL, _USER, _PW);
         } catch (ClassNotFoundException ce) {
-            System.out.println("드라이버 클래스 XXXXxxx");
-        } catch (Exception e) { // 멀티 블럭 작성 시 더 넓은 클래스가 뒤에 와야함
-            System.out.println("커넥션 실패");
+            System.out.println("드라이버 클래스를 찾을 수 없습니다.");
+        } catch (Exception e) {// 멀티 블럭 작성시 더 넓은 클래스가 뒤에 와야함
+            System.out.println("오라클 서버와 커넥션 실패");
         }
         return con;
     }
 
-    // 사용한 자원 반납(INSERT, UPDATE, DELETE)
-    // 반납 코드는 명시적으로 사용하는 것을 원칙
-    // 반납하는 순서는 생성된 역순으로 진행
-    public void freeConnection(Connection con, Statement stmt) {
-        if (stmt != null) {
+    // 사용한 자원을 반납하는 코드는 명시적으로 하는 것을 원칙으로 하고 있음
+    // 반납하는 순서는 생성된 역순으로 진행할 것, - 자바튜닝팀 지적사항
+    // 사용한 자원 반납하기 - INSERT, UPDATE, DELETE
+
+    // 오라클 서버와 연계에 필요한 객체
+    // 사용후에 반드시 자원 반납 할것 - 명시적으로(묵시적으로 언젠가는 처리됨)
+    public void freeConnection(Connection con, CallableStatement cstmt) {
+        if (cstmt != null) {
             try {
-                stmt.close();
+                cstmt.close();
             } catch (Exception e) {
                 // TODO: handle exception
             }
@@ -62,7 +69,24 @@ public class DBConnectionMgr {
         }
     }
 
-    // 사용한 자원 반납(SELECT)
+    public void freeConnection(Connection con, Statement stmt) {
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+        }
+        if (con != null) {
+            try {
+                con.close();
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+        }
+    } // end of freeConnection
+
+    // 사용한 자원 반납하기 - SELECT
     public void freeConnection(Connection con, Statement stmt, ResultSet rs) {
         if (rs != null) {
             try {
@@ -85,7 +109,7 @@ public class DBConnectionMgr {
                 // TODO: handle exception
             }
         }
-    }
+    } // end of freeConnection
 
     public void freeConnection(Connection con, PreparedStatement pstmt, ResultSet rs) {
         if (rs != null) {
@@ -109,22 +133,16 @@ public class DBConnectionMgr {
                 // TODO: handle exception
             }
         }
-    }
-
-    public static void main(String[] args) {
-        DBConnectionMgr dbMgr = new DBConnectionMgr();
-        Connection con = dbMgr.getConnection();
-        System.out.println("con : " + con);
-    }
+    } // end of freeConnection
 }
 
 /*
  * JDBC API 이용하여 DB연동
  * 1 각 제조사가 제공하는 드라이버 클래스 로딩
- *   Class.forName(드라이버 클래스 풀네임); 
+ * Class.forName(드라이버 클래스 풀네임);
  * 2 물리적으로 떨어져있는 오라클 서버와 연결 통로 확보
- *   Connection con = DriverManger.getConnection(URL,"scott","tiger");
- *   // Connection은 인터페이스 ; 오른쪽에 구현체 클래스 와야함
+ * Connection con = DriverManger.getConnection(URL,"scott","tiger");
+ * // Connection은 인터페이스 ; 오른쪽에 구현체 클래스 와야함
  * 3 DML문(;데이터 조작어)을 자바에서 오라클 서버로 전달해 줄 인터페이스 생성 ; Statement(정적 쿼리문),
  * PrepareStatement(동적 쿼리문)
  * 4 SELECT문의 경우 오라클 서버에서 제공하는 커서를 지원하는 ResultSet 인터페이스 활용하여
